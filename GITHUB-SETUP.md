@@ -51,6 +51,26 @@ The rest of the setup will guide you through:
 4. Connecting your repository to ChatGPT.
 5. Uploading your first note.
 
+## One-time ChatGPT ↔ GitHub connection
+
+GitHub account creation and repository setup can be automated or guided, but the security authorization between your ChatGPT account and GitHub must be approved by you.
+
+When you reach the ChatGPT connection step:
+
+1. In ChatGPT, open **Settings → Apps**.
+2. Find **GitHub** and choose **Connect**.
+3. GitHub will open and ask you to authorize the ChatGPT app.
+4. When GitHub asks which repositories ChatGPT may access, choose **Only select repositories** if that option is available.
+5. Select only the church-notes repository you just created.
+6. Approve the connection.
+7. Return to ChatGPT.
+
+This keeps access limited to the notes repository instead of granting access to every repository in your GitHub account.
+
+If the repository does not appear in ChatGPT immediately, wait a few minutes and check again. Newly created or private repositories can take a short time to become available after authorization.
+
+If ChatGPT later asks you to approve an action before saving a note, review the action and approve it only when you want that change made.
+
 ## What happens when everything is ready
 
 Create GitHub account  
@@ -59,7 +79,7 @@ Create your notes repository from the template
 ↓  
 Answer a few setup questions  
 ↓  
-Connect ChatGPT  
+Connect ChatGPT to GitHub and authorize only this repository  
 ↓  
 Upload a photo of your notes  
 ↓  
