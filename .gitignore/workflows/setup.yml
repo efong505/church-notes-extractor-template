@@ -1,0 +1,21 @@
+name: Initial Setup
+
+on:
+  workflow_dispatch:
+    inputs:
+      owner_name:
+        description: "Your name"
+        required: true
+
+      second_person_name:
+        description: "Second person's name, if any"
+        required: false
+
+      church_name:
+        description: "Church name"
+        required: true
+
+      bible_translation:
+        description: "Default Bible translation"
+        required: true
+        default: "NKJV"
