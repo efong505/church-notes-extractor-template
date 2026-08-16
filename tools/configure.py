@@ -86,6 +86,49 @@ def author_question(authors: list[dict]) -> str:
     return f"Before processing an uploaded photo, ask: \"Are these {joined} notes?\" Do not continue until the author is confirmed."
 
 
+def welcome_message(config: dict) -> str:
+    authors = config["authors"]
+    church = config["church_name"]
+    title = config["system_title"]
+    short_names = [a["short_name"] for a in authors]
+
+    if len(short_names) == 1:
+        author_line = f"- 👤 Keep {short_names[0]}'s notes organized automatically"
+        first_step = f"I'll use {short_names[0]} as the note author, determine the note type, format it, check the repository, and guide you through saving it."
+    elif len(short_names) == 2:
+        author_line = f"- 👤 Keep {short_names[0]}'s and {short_names[1]}'s notes organized separately"
+        first_step = f"I'll first ask whether the notes are {short_names[0]}'s or {short_names[1]}'s, then determine the note type, format it, check the repository, and guide you through saving it."
+    else:
+        names = ", ".join(short_names[:-1]) + f", and {short_names[-1]}"
+        author_line = f"- 👤 Keep notes for {names} organized separately"
+        first_step = "I'll first ask whose notes they are, then determine the note type, format it, check the repository, and guide you through saving it."
+
+    church_line = f" for **{church}**" if church else ""
+
+    return f'''---
+👋 Welcome to the **{title} Notes Extractor!**
+
+I'm here to help you turn handwritten or typed church notes into organized Markdown files and save them directly to your GitHub notes repository{church_line}.
+
+Here's what I can do:
+- 📸 Read a photo of handwritten or typed notes
+- 📝 Format service, devotional, or personal ministry notes
+- 📖 Format Scripture references and Bible links automatically
+{author_line}
+- 🔍 Check whether a note for that date already exists
+- ➕ Append additional notes when they belong with an existing entry
+- 📂 Save each note to the correct folder automatically
+- 🔗 Give you the direct GitHub link after it is saved
+- 🗂️ Let GitHub automatically rebuild your notes index after each push
+
+**To get started, just upload a photo of your notes.**
+
+{first_step}
+
+No technical knowledge is required for normal use.
+---'''
+
+
 def generate_prompt(config: dict) -> str:
     authors = config["authors"]
     author_rows = "\n".join(
@@ -94,10 +137,19 @@ def generate_prompt(config: dict) -> str:
     )
     bible_id = config["bible_id"]
     translation = config["bible_translation"]
+    welcome = welcome_message(config)
+
     return f'''# Church Notes Extractor — Project Instructions
 
 You are a Markdown formatter for **{config['system_title']}**.
 Repository: `{config['repository']}`
+
+## Project welcome
+When the user opens this project, greet them with the following message before anything else:
+
+{welcome}
+
+After the welcome has been shown, follow the instructions below for all note-processing work.
 
 ## Authors
 {author_rows}
@@ -226,7 +278,7 @@ def update_readme(config: dict) -> None:
     author_names = ", ".join(a["name"] for a in config["authors"])
     text = f'''# {title}
 
-This repository was created from the Church Notes Extractor template and has been configured.
+Your Church Notes Extractor repository is configured and ready for the final ChatGPT connection.
 
 ## Configuration
 
@@ -234,18 +286,52 @@ This repository was created from the Church Notes Extractor template and has bee
 - **Authors:** {author_names}
 - **Default Bible translation:** {config['bible_translation']}
 
-## Start using it
+## Start here
 
-1. Open `prompts/chatgpt-project-instructions.md`.
-2. Copy the entire file into a ChatGPT Project's instructions.
-3. Connect that ChatGPT Project to this GitHub repository.
-4. Upload a photo of church notes and follow the prompts.
+Open **`START-HERE.md`** and follow the short final setup checklist.
+
+After that, normal use is simple: open your ChatGPT Project and upload a photo of your notes.
 
 When notes are committed, GitHub Actions automatically regenerates `INDEX.md`.
-
-See `SETUP-COMPLETE.md` for the remaining ChatGPT connection steps.
 '''
     readme.write_text(text, encoding="utf-8")
+
+
+def write_start_here(config: dict) -> None:
+    authors = ", ".join(a["name"] for a in config["authors"])
+    church = config["church_name"] or "Not specified"
+    text = f'''# Start Here — Your Church Notes System Is Ready
+
+Your repository has been personalized successfully.
+
+## Your setup
+
+- **Notes system:** {config['system_title']}
+- **Church:** {church}
+- **Authors:** {authors}
+- **Default Bible translation:** {config['bible_translation']}
+
+## Final ChatGPT setup
+
+- [ ] Open `prompts/chatgpt-project-instructions.md` in this repository.
+- [ ] Copy the entire contents of that file.
+- [ ] Create a new ChatGPT Project for your church notes.
+- [ ] Paste the copied text into the Project instructions.
+- [ ] Connect GitHub to ChatGPT and grant access to this repository.
+- [ ] Open the Project. You should see your personalized welcome message.
+- [ ] Upload a photo of your first church note.
+
+## What happens after setup
+
+For normal use, you do not need to run Python, edit YAML, or manage folders manually.
+
+You upload a note photo in ChatGPT, review the formatted note, approve the GitHub save, and the repository automatically rebuilds `INDEX.md` after the note is pushed.
+
+## Need the full setup details?
+
+See `SETUP.md` for troubleshooting and technical setup information.
+'''
+    (ROOT / "START-HERE.md").write_text(text, encoding="utf-8")
 
 
 def main() -> None:
@@ -281,6 +367,7 @@ def main() -> None:
         generate_prompt(config), encoding="utf-8"
     )
     update_readme(config)
+    write_start_here(config)
 
     setup_complete = f'''# Setup Complete
 
@@ -293,16 +380,11 @@ Your Church Notes Extractor repository has been personalized.
 - Church: **{church or 'Not specified'}**
 - Default Bible translation: **{translation}**
 
-## Finish the ChatGPT connection
+## Next step
 
-1. Open `prompts/chatgpt-project-instructions.md` in this repository.
-2. Copy all of its contents.
-3. In ChatGPT, create a Project for your church notes.
-4. Paste the copied text into the Project instructions.
-5. Connect GitHub to ChatGPT and grant access to this repository.
-6. Upload your first note photo.
+Open **`START-HERE.md`** and complete the short ChatGPT connection checklist.
 
-After ChatGPT pushes a note, the `Rebuild Notes Index` GitHub Action updates `INDEX.md` automatically.
+Your generated ChatGPT instructions already include a personalized welcome message explaining what the system does and how to begin.
 '''
     (ROOT / "SETUP-COMPLETE.md").write_text(setup_complete, encoding="utf-8")
     print(f"Configured {title} for {len(authors)} author(s).")
