@@ -2,6 +2,8 @@
 
 This guide is written for people who do not normally work with GitHub.
 
+> **Don't have a GitHub account yet?** Start with [GITHUB-SETUP.md](GITHUB-SETUP.md), then return here after your new repository has been created from the template.
+
 ## Step 1 — Create your repository
 
 1. On the template repository page, click **Use this template**.
@@ -34,7 +36,7 @@ In your new repository:
 5. Click **Run workflow**.
 6. Wait for the run to show a green check mark.
 
-The workflow creates personalized author folders, writes `config/church-notes.json`, generates ChatGPT instructions, and updates the repository README.
+The workflow creates personalized author folders, writes `config/church-notes.json`, generates ChatGPT instructions and a personalized welcome, and updates the repository README.
 
 ## Step 4 — Connect ChatGPT
 
