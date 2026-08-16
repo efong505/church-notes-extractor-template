@@ -300,6 +300,7 @@ When notes are committed, GitHub Actions automatically regenerates `INDEX.md`.
 def write_start_here(config: dict) -> None:
     authors = ", ".join(a["name"] for a in config["authors"])
     church = config["church_name"] or "Not specified"
+    repo = config["repository"]
     text = f'''# Start Here — Your Church Notes System Is Ready
 
 Your repository has been personalized successfully.
@@ -310,16 +311,33 @@ Your repository has been personalized successfully.
 - **Church:** {church}
 - **Authors:** {authors}
 - **Default Bible translation:** {config['bible_translation']}
+- **GitHub repository:** `{repo}`
 
-## Final ChatGPT setup
+## One-time GitHub connection
+
+Before ChatGPT can work with this repository, connect your GitHub account once:
+
+- [ ] In ChatGPT, open **Settings → Apps**.
+- [ ] Find **GitHub** and choose **Connect**.
+- [ ] Complete the GitHub authorization screen.
+- [ ] When GitHub asks which repositories ChatGPT may access, choose **Only select repositories** if available.
+- [ ] Select only `{repo}`.
+- [ ] Approve the connection and return to ChatGPT.
+
+This authorization cannot be completed automatically because GitHub requires the account owner to approve access. Limiting access to this notes repository keeps the permission scope as small as practical.
+
+If this new or private repository does not appear immediately in ChatGPT, wait a few minutes and check again.
+
+## Final ChatGPT Project setup
 
 - [ ] Open `prompts/chatgpt-project-instructions.md` in this repository.
 - [ ] Copy the entire contents of that file.
 - [ ] Create a new ChatGPT Project for your church notes.
 - [ ] Paste the copied text into the Project instructions.
-- [ ] Connect GitHub to ChatGPT and grant access to this repository.
 - [ ] Open the Project. You should see your personalized welcome message.
 - [ ] Upload a photo of your first church note.
+
+If ChatGPT asks you to approve an action before saving or changing a note, review the action and approve it only when you want the repository changed.
 
 ## What happens after setup
 
@@ -329,7 +347,7 @@ You upload a note photo in ChatGPT, review the formatted note, approve the GitHu
 
 ## Need the full setup details?
 
-See `SETUP.md` for troubleshooting and technical setup information.
+See `SETUP.md` for troubleshooting and technical setup information. If you still need a GitHub account, see `GITHUB-SETUP.md`.
 '''
     (ROOT / "START-HERE.md").write_text(text, encoding="utf-8")
 
@@ -382,7 +400,7 @@ Your Church Notes Extractor repository has been personalized.
 
 ## Next step
 
-Open **`START-HERE.md`** and complete the short ChatGPT connection checklist.
+Open **`START-HERE.md`** and complete the short GitHub connection and ChatGPT Project checklist.
 
 Your generated ChatGPT instructions already include a personalized welcome message explaining what the system does and how to begin.
 '''
