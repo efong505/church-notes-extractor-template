@@ -13,6 +13,8 @@ GitHub is where your church notes will be stored. Think of it as the online fili
 - [ ] About 10 minutes for the initial setup
 - [ ] A photo of a church note to test when setup is complete
 
+> **ChatGPT plan note:** You can begin with a free ChatGPT account, but Free users have lower usage limits and may hit limits on file/image uploads or repeated use. Frequent users may prefer a paid plan. See [CHATGPT-PLANS.md](CHATGPT-PLANS.md) for details. This project receives no commission, referral payment, affiliate fee, or other compensation if you subscribe to a paid ChatGPT plan.
+
 ## Step 1 — Create a GitHub account
 
 1. Go to GitHub and choose **Sign up**.
@@ -92,3 +94,5 @@ Your note is saved and your index updates automatically
 If you already created your repository but are unsure what to do next, open `SETUP.md`.
 
 If your repository has already been personalized by the setup workflow, open `START-HERE.md`.
+
+For ChatGPT Free, Plus, and Pro usage guidance, see `CHATGPT-PLANS.md`.
