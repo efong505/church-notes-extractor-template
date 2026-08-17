@@ -33,6 +33,16 @@ Open **`START-HERE.md`** in your new repository. It contains the final ChatGPT c
 - [ ] About 10 minutes for initial setup
 - [ ] A photo of a church note to test
 
+## A note about ChatGPT plans
+
+You can start with a free ChatGPT account, but Free accounts have lower usage limits, including limits that can affect file/image uploads and repeated note-processing sessions. Frequent users may find a paid plan more practical.
+
+As of August 2026, ChatGPT Plus is $20/month. ChatGPT Pro is intended for heavier use and OpenAI currently documents Pro options with higher usage allowances. Pricing, features, and limits can change.
+
+**This project is not sponsored by OpenAI. We receive no commission, affiliate fee, referral payment, or other compensation if you choose a paid ChatGPT plan.**
+
+See **[CHATGPT-PLANS.md](CHATGPT-PLANS.md)** for current guidance and official OpenAI pricing links.
+
 ## What happens during setup
 
 1. Create your repository from this template.
@@ -49,6 +59,7 @@ After notes are pushed, GitHub Actions automatically rebuilds `INDEX.md`.
 
 - `GITHUB-SETUP.md` — beginner instructions for creating a GitHub account.
 - `SETUP.md` — complete guided repository setup.
+- `CHATGPT-PLANS.md` — ChatGPT Free/paid-plan usage guidance and no-commission disclosure.
 - `tools/configure.py` — personalizes the repository from the setup form.
 - `tools/build-index.py` — generates the searchable Markdown index.
 - `.github/workflows/setup.yml` — first-run configuration form and automation.
