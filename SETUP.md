@@ -4,6 +4,8 @@ This guide is written for people who do not normally work with GitHub.
 
 > **Don't have a GitHub account yet?** Start with [GITHUB-SETUP.md](GITHUB-SETUP.md), then return here after your new repository has been created from the template.
 
+> **ChatGPT plan note:** You can start with a free ChatGPT account, but Free users have lower usage limits that can affect image/file uploads and repeated note-processing sessions. Frequent users may prefer a paid plan. See [CHATGPT-PLANS.md](CHATGPT-PLANS.md). This project receives no commission, referral payment, affiliate fee, or other compensation from paid ChatGPT subscriptions.
+
 ## Step 1 — Create your repository
 
 1. On the template repository page, click **Use this template**.
@@ -84,3 +86,7 @@ If `INDEX.md` changes, the workflow commits the new index back to the repository
 ## Need to change names later?
 
 Run **Configure Church Notes System** again with the new values. Existing note files are not deleted. New personalized folders and instructions are generated from the latest setup values.
+
+## ChatGPT plan details
+
+See [CHATGPT-PLANS.md](CHATGPT-PLANS.md) for current Free, Plus, and Pro guidance and official OpenAI pricing links.
