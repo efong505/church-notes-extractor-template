@@ -49,20 +49,18 @@ def parse_names(primary: str, additional: str) -> list[dict]:
     raw.extend(part.strip() for part in additional.split(",") if part.strip())
     seen_names: set[str] = set()
     used_slugs: set[str] = set()
-    authors = []
+    authors: list[dict] = []
     for index, name in enumerate(raw):
         key = name.casefold()
         if key in seen_names:
             continue
         seen_names.add(key)
-        authors.append(
-            {
-                "name": name,
-                "short_name": name.split()[0],
-                "slug": unique_slug(name, used_slugs),
-                "primary": index == 0,
-            }
-        )
+        authors.append({
+            "name": name,
+            "short_name": name.split()[0],
+            "slug": unique_slug(name, used_slugs),
+            "primary": index == 0,
+        })
     return authors
 
 
@@ -83,7 +81,7 @@ def author_question(authors: list[dict]) -> str:
         joined = f"{names[0]}'s or {names[1]}'s"
     else:
         joined = ", ".join(f"{n}'s" for n in names[:-1]) + f", or {names[-1]}'s"
-    return f"Before processing an uploaded photo, ask: \"Are these {joined} notes?\" Do not continue until the author is confirmed."
+    return f'Before processing an uploaded photo, ask: "Are these {joined} notes?" Do not continue until the author is confirmed.'
 
 
 def welcome_message(config: dict) -> str:
@@ -179,10 +177,22 @@ When the user uploads a photo of handwritten or typed church notes:
 Every file starts with exactly one HTML comment:
 `<!-- date: YYYY-MM-DD | author: [full author name] | title: [title] | type: [service|devotional|personal] | speaker: [speaker or Holy Spirit for devotionals] | scripture: [primary references] | tags: [comma separated] | summary: [one sentence] -->`
 
+## Visible date rule
+Immediately below the visible `#` title, always include the note date in bold, written as `**Month Day, Year**`.
+Example:
+
+# Trust in the Lord
+
+**August 17, 2026**
+
+This visible date is required for service, devotional, and personal notes even though the date also appears in metadata and the filename.
+
 ## Service template
 <!-- date: YYYY-MM-DD | author: [Author] | title: [Title] | type: service | speaker: [Speaker] | scripture: [refs] | tags: [tags] | summary: [summary] -->
 
 # [Day], [Month] [Day] Service, [Speaker] — [Message Title]
+
+**[Month] [Day], [Year]**
 
 ## Offering Scripture
 > [scripture text]
@@ -206,6 +216,8 @@ Every file starts with exactly one HTML comment:
 
 # [Title]
 
+**[Month] [Day], [Year]**
+
 ## Morning 🌄
 
 ### [Section heading]
@@ -223,6 +235,8 @@ Every file starts with exactly one HTML comment:
 <!-- date: YYYY-MM-DD | author: [Author] | title: [Title] | type: personal | speaker: | scripture: [refs if any] | tags: [tags] | summary: [summary] -->
 
 # [Title]
+
+**[Month] [Day], [Year]**
 
 ## Purpose
 [purpose]
@@ -247,6 +261,7 @@ Every file starts with exactly one HTML comment:
 - Default translation: {translation}.
 - If a translation is visible in the notes, use that translation instead.
 - If the date is visible, use it; otherwise use today's date.
+- Always display the resolved date immediately below the `#` title in bold as `**Month Day, Year**`.
 - If a speaker is visible, preserve the speaker name exactly as written.
 - For devotionals, always set `speaker: Holy Spirit`.
 - Morning notes use `## Morning 🌄`; evening notes use `## Evening 🌄`.
