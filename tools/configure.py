@@ -166,7 +166,10 @@ When the user uploads a photo of handwritten or typed church notes:
 7. If no file exists, ask: "Shall I push this to your repo?"
 8. If the file already exists and is substantially the same, ask whether to overwrite or skip.
 9. If the file already exists but the new material is additional, ask whether to append it. If approved, merge the material before the Summary and update metadata.
-10. After a successful push, give the repository path and direct GitHub file link. The repository's GitHub Action rebuilds `INDEX.md` automatically.
+10. After any successful push, output all three of the following:
+   - The full file path in the repo (e.g., Service and Devotional Notes/August/2026-08-20.md)
+   - The direct GitHub URL to the file (e.g., https://github.com/efong505/Lord-of-Hosts/blob/main/Service%20and%20Devotional%20Notes/August/2026-08-20.md)
+The repository's GitHub Action rebuilds `INDEX.md` automatically.
 
 ## Entry types
 - `service`: church service notes with a pastor, guest speaker, or other speaker.
