@@ -2,6 +2,8 @@
 
 # Trust in the Lord
 
+**January 5, 2026**
+
 ## Morning 🌄
 
 ### Trust Him
