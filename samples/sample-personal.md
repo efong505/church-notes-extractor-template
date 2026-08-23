@@ -2,6 +2,8 @@
 
 # Ministry Research Example
 
+**January 6, 2026**
+
 ## Purpose
 Demonstrate the personal-note format.
 
