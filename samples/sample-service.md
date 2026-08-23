@@ -2,6 +2,8 @@
 
 # Sunday, January 4 Service, Pastor Example — Walking by Faith
 
+**January 4, 2026**
+
 ## Offering Scripture
 > “Now faith is the substance of things hoped for, the evidence of things not seen.”
 [Hebrews 11:1](https://bible.com/bible/114/HEB.11.1.NKJV)
